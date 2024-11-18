@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+{% if messages %}
+
+    {% for msg in messages %}
+    <h1 class="{{msg.tags}}">{{msg}}</h1>
+    
+    {% endfor %}
+{% endif %}
+<h1 class='text-center mt-4'>HOME PAGE</h1>
+{% comment %} {{products}}  {% endcomment %}
+<div class="container row gap-3">
+    {% for product in  products %}
+    
+    <div class="card" style="width: 18rem;">
+        <img src="{{product.image.url}}" class="card-img-top" alt="..." >
+        <div class="card-body">
+          <h5 class="card-title">product name:{{product.name}}</h5>
+          <h5 class="card-text">product color:{{product.price}}</h5>
+          <h5 class="card-text">price:{{product.color}}</h5>
+          
+          <a href="{% url "add-to-cart" product.id %}" class="btn btn-primary">add to cart</a>
+        </div>
+    </div>
+    
+    {% endfor %}
+</div>
+
+{% endblock content %}

@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block monu %}
+<style> 
+.success{
+    color:red
+}
+.error{
+    color:red
+}
+
+</style>
+{% endblock monu%}
+
+
+{% block content %}
+
+<h1 class='text-center mt-4'>CART PAGE</h1>
+{% if messages %}
+    {% for msg in messages %}
+    <h1 class="{{msg.tags}}">{{msg}}</h1>
+    
+    {% endfor %}
+{% endif %}
+
+
+
+{% comment %} {{products}}  {% endcomment %}
+<div class="container row gap-3">
+    {% for item in  items %}
+    <div class="card" style="width: 18rem;">
+        <img src="{{item.product.image.url}}" class="card-img-top" alt="..." >
+        <div class="card-body">
+          <h5 class="card-title">product name: {{item.product.name}}</h5>
+          <h5 class="card-text">product color: {{item.product.color}}</h5>
+          <p class="card-text">quantity: {{item.quantity}}</p>
+          <p class="card-text">price: {{item.sub_total}}</p>
+          <a class="btn btn-danger" href="{% url "remove-from-cart" item.id %}">-</a>
+          <a class="btn btn-success" href="{% url "update-cart" item.id %}">+</a>
+          <a class="btn btn-danger" href="{% url "delete-cart" item.id %}">Remove</a>
+           
+        </div>
+    </div>
+    {% endfor %}
+    
+    <div class="row">
+    <div class="card text-bg-warning mb-3" style="">
+         
+        <div class="col-sm-6 card-body">
+          <h5 class="card-title">overall price: <span>{{price}}</span></h5>
+        </div>
+    </div>
+   
+
+
+</div>
+{% endblock content %}
